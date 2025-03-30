@@ -14,10 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "mutation createUser($name: String!, $email: String!, $age: Int!, $numberPublication: Int) {\n  createUserMut(\n    name: $name\n    email: $email\n    age: $age\n    numberPublication: $numberPublication\n  ) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": typeof types.CreateUserDocument,
     "query GetUserById($id: ID!) {\n  getUserById(id: $id) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": typeof types.GetUserByIdDocument,
     "query GetUsers {\n  getUsers {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
+    "mutation createUser($name: String!, $email: String!, $age: Int!, $numberPublication: Int) {\n  createUserMut(\n    name: $name\n    email: $email\n    age: $age\n    numberPublication: $numberPublication\n  ) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": types.CreateUserDocument,
     "query GetUserById($id: ID!) {\n  getUserById(id: $id) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": types.GetUserByIdDocument,
     "query GetUsers {\n  getUsers {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}": types.GetUsersDocument,
 };
@@ -36,6 +38,10 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation createUser($name: String!, $email: String!, $age: Int!, $numberPublication: Int) {\n  createUserMut(\n    name: $name\n    email: $email\n    age: $age\n    numberPublication: $numberPublication\n  ) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}"): (typeof documents)["mutation createUser($name: String!, $email: String!, $age: Int!, $numberPublication: Int) {\n  createUserMut(\n    name: $name\n    email: $email\n    age: $age\n    numberPublication: $numberPublication\n  ) {\n    id\n    name\n    email\n    age\n    numberPublication\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,0 +1,11 @@
+
+
+mutation createUser($name: String!, $email: String!, $age: Int!, $numberPublication: Int) {
+    createUserMut(name: $name, email: $email, age: $age, numberPublication: $numberPublication) {
+        id 
+        name
+        email
+        age 
+        numberPublication
+    }
+}
