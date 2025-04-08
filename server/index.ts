@@ -1,13 +1,9 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { PrismaClient } from '@prisma/client';
-
-// const usersLocalTest = [
-//     {id: "1", name: "gyom", email: "guillaume1.leformal@gmail.com", age: 22, numberPublication: 5},
-//     {id: "2", name: "gus", email: "gus.leformal@gmail.com", age: 22, numberPublication: 6},
-//     {id: "3", name: "rayane", email: "rayane.abcd@gmail.com", age: 6, numberPublication: 0},
-//     {id: "4", name: "adrien", email: "adrien.abcd@gmail.com", age: 22, numberPublication: 10}
-// ]
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 const typeDefs = `
     type Query {
@@ -16,26 +12,37 @@ const typeDefs = `
     }
 
     type Mutation {
-        createUserMut(name: String!, email: String!, age: Int!, numberPublication: Int): User
+        createUserMut(name: String!, email: String!, age: Int!, password: String!, numberPublication: Int, listPublications: [Publication!]): User
+        signup(name: String!, email: String!, age: Int!, password: String!): AuthPayload
+        signin(email: String!, password: String!): AuthPayload
+    }
+
+    type AuthPayload {
+        token: String
+        user: User
     }
 
     type User {
         id: ID
-        name: String
-        email: String
-        age: Int
-        numberPublication: Int,
+        name: String?
+        email: String?
+        age: Int?
+        password: String?
+        numberPublication: Int
+        listPublications: [Publication!]!
     }
     type Publication {
         id: ID
-        title: String
-        description: String
-        author: String
-        image: String
-        comment: String
+        title: String?
+        description: String?
+        authorId: String!
+        author: User?
+        image: String?
+        comment: String?
         like: Int
     }
 `;
+//TODO: changer type Publication
 const prisma = new PrismaClient();
 
 const resolvers = {
@@ -54,20 +61,54 @@ const resolvers = {
     },
     Mutation: {
         //CRUD methods for the API
+        
         createUserMut: async (_, args) => {
-            const {name, email, age, numberPublication} = args
+            const {name, email, age, password, numberPublication, listPublications} = args
+            const hashes = password ? await bcrypt.hash(password, 10) : null
             const newUser = await prisma.user.create({
                data: {
                     name,
                     email,
                     age, 
+                    password: hashes,
                     numberPublication,
                }
             })
             return newUser
+        },
+
+        signup: async (__, args) => {
+            const password = await bcrypt.hash(args.password, 10)
+            const user = await prisma.user.create({
+                data: {...args, password}
+            })
+            const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: '1d' })
+
+            return {
+                token, 
+                user
+            }
+        },
+
+        signin: async (__, args) => {
+            const user = await prisma.user.findUnique({ where: { email: args.email} })
+            if (!user) {
+                throw new Error('user not found')
+            }
+
+            const valid = await bcrypt.compare(args.password, "user.password")
+            if (!valid) {
+                throw new Error('Invalid Password')
+            }
+            const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: '1d' })
+            return {
+                token, 
+                user
+            }
+         
         }
     }
-}
+}   
 const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -78,4 +119,4 @@ const server = new ApolloServer({
     listen: { port: 4000 },
   });
    
-  console.log(`🚀  Server ready at: ${url}`);
+  console.log(`🚀  Apollo Server ready at: ${url}`);    
