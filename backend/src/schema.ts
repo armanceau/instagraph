@@ -21,6 +21,7 @@ export const typeDefs = gql`
       description: String!
     ): UpdatePartielleArticleResponse!
     incrementNombreDeLike(id: ID!): IncrementNombreDeLikeResponse!
+    createCommentaire(contenu: String!, userId: ID!, articleId: ID!): CreateCommentaireResponse!
   }
 
   type IncrementNombreDeLikeResponse {
@@ -29,7 +30,7 @@ export const typeDefs = gql`
     message: String!
     article: Article
   }
-
+  
   type CreateUserResponse {
     code: Int!
     success: Boolean!
@@ -48,6 +49,8 @@ export const typeDefs = gql`
     doctors: [Doctor]
     getArticles: [Article]
     getArticleById(id: ID!): Article
+    getCommentaireByID(id: ID!): Commentaire
+    getCommentaires: [Commentaire]
   }
 
   type User {
@@ -103,4 +106,19 @@ export const typeDefs = gql`
     message: String!
     article: Article
   }
+  type Commentaire {
+    id: ID!
+    contenu: String!
+    date: String!
+    auteur: User!
+    article: Article!
+  }
+
+  type CreateCommentaireResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    commentaire: Commentaire
+  }
+  
 `;
