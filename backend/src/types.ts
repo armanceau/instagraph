@@ -22,7 +22,7 @@ export type Scalars = {
 export type ModelArticle = {
   __typename?: 'Article';
   auteur: ModelUser;
-  date: Scalars['Int']['output'];
+  date: Scalars['String']['output'];
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   nombreDeLike: Scalars['Int']['output'];
@@ -222,7 +222,7 @@ export type ModelResolversParentTypes = {
 
 export type ModelArticleResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Article'] = ModelResolversParentTypes['Article']> = {
   auteur?: Resolver<ModelResolversTypes['User'], ParentType, ContextType>;
-  date?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;
+  date?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ModelResolversTypes['ID'], ParentType, ContextType>;
   nombreDeLike?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;

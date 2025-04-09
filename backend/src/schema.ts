@@ -52,7 +52,7 @@ export const typeDefs = gql`
     description: String!
     auteur: User!
     nombreDeLike: Int!
-    date: Int!
+    date: String!
   }
   type IncrementNombreDeLikeReponse {
     code: Int!

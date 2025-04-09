@@ -12,7 +12,7 @@ type ArticleMutations = WithRequired<ModelMutationResolvers, 'createArticle'>
          description,
          userId,
          nombreDeLike: 0,
-         date: Math.floor(Date.now() / 1000),
+         date: Math.floor(Date.now() / 1000 / 60),
 
         }
       });
