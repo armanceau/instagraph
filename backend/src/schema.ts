@@ -1,14 +1,17 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-
   type Mutation {
-    incrementNombreDeLike(id: ID!): IncrementNombreDeLikeReponse! 
+    incrementNombreDeLike(id: ID!): IncrementNombreDeLikeReponse!
     createUser(username: String!, password: String!): CreateUserResponse!
     signIn(username: String!, password: String!): SignInResponse!
-    createArticle(titre: String!, description: String!, userId: ID!):CreateArticleResponse!
+    createArticle(
+      titre: String!
+      description: String!
+      userId: ID!
+    ): CreateArticleResponse!
+    deleteArticle(id: ID!): DeleteArticleResponse!
   }
-
 
   # type IncrementNumberOfLikesResponse {
   #   code: Int!
@@ -16,7 +19,7 @@ export const typeDefs = gql`
   #   message: String!
   #   track: Track
   # }
-  
+
   type CreateUserResponse {
     code: Int!
     success: Boolean!
@@ -62,6 +65,13 @@ export const typeDefs = gql`
   }
 
   type CreateArticleResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    article: Article
+  }
+
+  type DeleteArticleResponse {
     code: Int!
     success: Boolean!
     message: String!
