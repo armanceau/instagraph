@@ -22,6 +22,8 @@ export const typeDefs = gql`
     ): UpdatePartielleArticleResponse!
     incrementNombreDeLike(id: ID!): IncrementNombreDeLikeResponse!
     createCommentaire(contenu: String!, userId: ID!, articleId: ID!): CreateCommentaireResponse!
+    deleteCommentaire(id: ID!): DeleteCommentaireResponse!
+    updateCommentaire(id: ID!, contenu: String!): UpdateCommentaireResponse!
   }
 
   type IncrementNombreDeLikeResponse {
@@ -119,6 +121,18 @@ export const typeDefs = gql`
     success: Boolean!
     message: String!
     commentaire: Commentaire
+  }
+  type DeleteCommentaireResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    article: Article
+  }
+  type UpdateCommentaireResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    article: Article
   }
   
 `;

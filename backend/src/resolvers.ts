@@ -32,6 +32,7 @@ export const resolvers = {
         where: {id}
     })
   }
+  
 
   },
   Mutation: {
