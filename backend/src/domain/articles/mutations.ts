@@ -4,7 +4,7 @@ import { WithRequired } from "../../utils/mapped-types.js";
 
 type ArticleMutations = WithRequired<
   ModelMutationResolvers,
-  "createArticle" | "deleteArticle" | "updateArticle"
+  "createArticle" | "deleteArticle" | "updateArticle" | "updatePartielleArticle"
 >;
 
 const createArticle: NonNullable<
@@ -95,8 +95,44 @@ const updateArticle: NonNullable<
   }
 };
 
+const updatePartielleArticle: NonNullable<
+  ModelMutationResolvers["updatePartielleArticle"]
+> = async (_, { id, titre, description }, { dataSources: { db } }) => {
+  try {
+    const dataToUpdate: any = {
+      date: Math.floor(Date.now() / 1000 / 60),
+    };
+
+    if (typeof titre !== "undefined") dataToUpdate.titre = titre;
+    if (typeof description !== "undefined")
+      dataToUpdate.description = description;
+
+    const updatedArticle = await db.article.update({
+      where: { id },
+      data: dataToUpdate,
+    });
+
+    return {
+      code: 201,
+      message: "Article has been updated",
+      success: true,
+      article: updatedArticle,
+    };
+  } catch (error: any) {
+    return {
+      code: 400,
+      message: `Article has not been updated: ${
+        error.message ?? "Unknown error"
+      }`,
+      success: false,
+      article: null,
+    };
+  }
+};
+
 export const articleMutations: ArticleMutations = {
   createArticle,
   deleteArticle,
   updateArticle,
+  updatePartielleArticle,
 };

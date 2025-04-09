@@ -75,6 +75,7 @@ export type ModelMutation = {
   incrementNombreDeLike: ModelIncrementNombreDeLikeReponse;
   signIn: ModelSignInResponse;
   updateArticle: ModelUpdateArticleResponse;
+  updatePartielleArticle: ModelUpdatePartielleArticleResponse;
 };
 
 
@@ -113,6 +114,13 @@ export type ModelMutationUpdateArticleArgs = {
   titre: Scalars['String']['input'];
 };
 
+
+export type ModelMutationUpdatePartielleArticleArgs = {
+  description: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  titre: Scalars['String']['input'];
+};
+
 export type ModelQuery = {
   __typename?: 'Query';
   doctors?: Maybe<Array<Maybe<ModelDoctor>>>;
@@ -135,6 +143,14 @@ export type ModelSignInResponse = {
 
 export type ModelUpdateArticleResponse = {
   __typename?: 'UpdateArticleResponse';
+  article?: Maybe<ModelArticle>;
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type ModelUpdatePartielleArticleResponse = {
+  __typename?: 'UpdatePartielleArticleResponse';
   article?: Maybe<ModelArticle>;
   code: Scalars['Int']['output'];
   message: Scalars['String']['output'];
@@ -232,6 +248,7 @@ export type ModelResolversTypes = {
   SignInResponse: ResolverTypeWrapper<ModelSignInResponse>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   UpdateArticleResponse: ResolverTypeWrapper<Omit<ModelUpdateArticleResponse, 'article'> & { article?: Maybe<ModelResolversTypes['Article']> }>;
+  UpdatePartielleArticleResponse: ResolverTypeWrapper<Omit<ModelUpdatePartielleArticleResponse, 'article'> & { article?: Maybe<ModelResolversTypes['Article']> }>;
   User: ResolverTypeWrapper<ModelUser>;
 };
 
@@ -251,6 +268,7 @@ export type ModelResolversParentTypes = {
   SignInResponse: ModelSignInResponse;
   String: Scalars['String']['output'];
   UpdateArticleResponse: Omit<ModelUpdateArticleResponse, 'article'> & { article?: Maybe<ModelResolversParentTypes['Article']> };
+  UpdatePartielleArticleResponse: Omit<ModelUpdatePartielleArticleResponse, 'article'> & { article?: Maybe<ModelResolversParentTypes['Article']> };
   User: ModelUser;
 };
 
@@ -309,6 +327,7 @@ export type ModelMutationResolvers<ContextType = DataSourceContext, ParentType e
   incrementNombreDeLike?: Resolver<ModelResolversTypes['IncrementNombreDeLikeReponse'], ParentType, ContextType, RequireFields<ModelMutationIncrementNombreDeLikeArgs, 'id'>>;
   signIn?: Resolver<ModelResolversTypes['SignInResponse'], ParentType, ContextType, RequireFields<ModelMutationSignInArgs, 'password' | 'username'>>;
   updateArticle?: Resolver<ModelResolversTypes['UpdateArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationUpdateArticleArgs, 'description' | 'id' | 'titre'>>;
+  updatePartielleArticle?: Resolver<ModelResolversTypes['UpdatePartielleArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationUpdatePartielleArticleArgs, 'description' | 'id' | 'titre'>>;
 };
 
 export type ModelQueryResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Query'] = ModelResolversParentTypes['Query']> = {
@@ -333,6 +352,14 @@ export type ModelUpdateArticleResponseResolvers<ContextType = DataSourceContext,
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ModelUpdatePartielleArticleResponseResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['UpdatePartielleArticleResponse'] = ModelResolversParentTypes['UpdatePartielleArticleResponse']> = {
+  article?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType>;
+  code?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;
+  message?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ModelResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ModelUserResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['User'] = ModelResolversParentTypes['User']> = {
   id?: Resolver<ModelResolversTypes['ID'], ParentType, ContextType>;
   username?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
@@ -350,6 +377,7 @@ export type ModelResolvers<ContextType = DataSourceContext> = {
   Query?: ModelQueryResolvers<ContextType>;
   SignInResponse?: ModelSignInResponseResolvers<ContextType>;
   UpdateArticleResponse?: ModelUpdateArticleResponseResolvers<ContextType>;
+  UpdatePartielleArticleResponse?: ModelUpdatePartielleArticleResponseResolvers<ContextType>;
   User?: ModelUserResolvers<ContextType>;
 };
 
