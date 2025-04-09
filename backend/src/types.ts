@@ -74,6 +74,7 @@ export type ModelMutation = {
   deleteArticle: ModelDeleteArticleResponse;
   incrementNombreDeLike: ModelIncrementNombreDeLikeReponse;
   signIn: ModelSignInResponse;
+  updateArticle: ModelUpdateArticleResponse;
 };
 
 
@@ -105,6 +106,13 @@ export type ModelMutationSignInArgs = {
   username: Scalars['String']['input'];
 };
 
+
+export type ModelMutationUpdateArticleArgs = {
+  description: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  titre: Scalars['String']['input'];
+};
+
 export type ModelQuery = {
   __typename?: 'Query';
   doctors?: Maybe<Array<Maybe<ModelDoctor>>>;
@@ -123,6 +131,14 @@ export type ModelSignInResponse = {
   message: Scalars['String']['output'];
   success: Scalars['Boolean']['output'];
   token?: Maybe<Scalars['String']['output']>;
+};
+
+export type ModelUpdateArticleResponse = {
+  __typename?: 'UpdateArticleResponse';
+  article?: Maybe<ModelArticle>;
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type ModelUser = {
@@ -215,6 +231,7 @@ export type ModelResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   SignInResponse: ResolverTypeWrapper<ModelSignInResponse>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  UpdateArticleResponse: ResolverTypeWrapper<Omit<ModelUpdateArticleResponse, 'article'> & { article?: Maybe<ModelResolversTypes['Article']> }>;
   User: ResolverTypeWrapper<ModelUser>;
 };
 
@@ -233,6 +250,7 @@ export type ModelResolversParentTypes = {
   Query: {};
   SignInResponse: ModelSignInResponse;
   String: Scalars['String']['output'];
+  UpdateArticleResponse: Omit<ModelUpdateArticleResponse, 'article'> & { article?: Maybe<ModelResolversParentTypes['Article']> };
   User: ModelUser;
 };
 
@@ -290,6 +308,7 @@ export type ModelMutationResolvers<ContextType = DataSourceContext, ParentType e
   deleteArticle?: Resolver<ModelResolversTypes['DeleteArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationDeleteArticleArgs, 'id'>>;
   incrementNombreDeLike?: Resolver<ModelResolversTypes['IncrementNombreDeLikeReponse'], ParentType, ContextType, RequireFields<ModelMutationIncrementNombreDeLikeArgs, 'id'>>;
   signIn?: Resolver<ModelResolversTypes['SignInResponse'], ParentType, ContextType, RequireFields<ModelMutationSignInArgs, 'password' | 'username'>>;
+  updateArticle?: Resolver<ModelResolversTypes['UpdateArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationUpdateArticleArgs, 'description' | 'id' | 'titre'>>;
 };
 
 export type ModelQueryResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Query'] = ModelResolversParentTypes['Query']> = {
@@ -303,6 +322,14 @@ export type ModelSignInResponseResolvers<ContextType = DataSourceContext, Parent
   message?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ModelResolversTypes['Boolean'], ParentType, ContextType>;
   token?: Resolver<Maybe<ModelResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ModelUpdateArticleResponseResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['UpdateArticleResponse'] = ModelResolversParentTypes['UpdateArticleResponse']> = {
+  article?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType>;
+  code?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;
+  message?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ModelResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -322,6 +349,7 @@ export type ModelResolvers<ContextType = DataSourceContext> = {
   Mutation?: ModelMutationResolvers<ContextType>;
   Query?: ModelQueryResolvers<ContextType>;
   SignInResponse?: ModelSignInResponseResolvers<ContextType>;
+  UpdateArticleResponse?: ModelUpdateArticleResponseResolvers<ContextType>;
   User?: ModelUserResolvers<ContextType>;
 };
 

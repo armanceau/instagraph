@@ -11,6 +11,7 @@ export const typeDefs = gql`
       userId: ID!
     ): CreateArticleResponse!
     deleteArticle(id: ID!): DeleteArticleResponse!
+    updateArticle(id: ID! titre: String!, description: String!):UpdateArticleResponse!
   }
 
   # type IncrementNumberOfLikesResponse {
@@ -72,6 +73,13 @@ export const typeDefs = gql`
   }
 
   type DeleteArticleResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    article: Article
+  }
+
+  type UpdateArticleResponse {
     code: Int!
     success: Boolean!
     message: String!
