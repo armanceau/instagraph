@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node index.ts"
+    "dev": "npx tsx src/index.ts",
+    "prisma": "prisma",
+    "codegen": "graphql-codegen"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "type": "module",
   "dependencies": {
     "@apollo/server": "^4.11.3",
+    "@graphql-codegen/cli": "^5.0.5",
     "@prisma/client": "^6.5.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
@@ -21,10 +24,12 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@graphql-codegen/typescript-resolvers": "^4.5.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "prisma": "^6.5.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.8.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
   }
 }
