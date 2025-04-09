@@ -1,12 +1,12 @@
 import { GraphQLError } from "graphql";
 import { comparePasswords, createJWT, hashPassword } from "../../modules/auth.js";
-import { MutationResolvers } from "../../types.js";
+import { ModelMutationResolvers } from "../../types.js";
 import { WithRequired } from "../../utils/mapped-types.js";
 
-type UserMutations = WithRequired<MutationResolvers, 'createUser' | 'signIn'>
+type UserMutations = WithRequired<ModelMutationResolvers, 'createUser' | 'signIn'>
 
 
-const createUser: NonNullable<MutationResolvers['createUser']> = async (_, {username, password}, {dataSources: {db}}) => {
+const createUser: NonNullable<ModelMutationResolvers['createUser']> = async (_, {username, password}, {dataSources: {db}}) => {
   try {
     const createdUser = await db.user.create({
       data: {
@@ -31,7 +31,7 @@ const createUser: NonNullable<MutationResolvers['createUser']> = async (_, {user
   }
 }
 
-const signIn: NonNullable<MutationResolvers['signIn']> = async (_, {username, password}, {dataSources: {db}}) => {
+const signIn: NonNullable<ModelMutationResolvers['signIn']> = async (_, {username, password}, {dataSources: {db}}) => {
   try {
     const user = await db.user.findFirstOrThrow({where: {username}})
     const isValidPassword = await comparePasswords(password, user.password)
