@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { Article } from '@prisma/client';
+import { Article, Commentaire } from '@prisma/client';
 import { DataSourceContext } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -29,10 +29,27 @@ export type ModelArticle = {
   titre: Scalars['String']['output'];
 };
 
+export type ModelCommentaire = {
+  __typename?: 'Commentaire';
+  article: ModelArticle;
+  auteur: ModelUser;
+  contenu: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+};
+
 export type ModelCreateArticleResponse = {
   __typename?: 'CreateArticleResponse';
   article?: Maybe<ModelArticle>;
   code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type ModelCreateCommentaireResponse = {
+  __typename?: 'CreateCommentaireResponse';
+  code: Scalars['Int']['output'];
+  commentaire?: Maybe<ModelCommentaire>;
   message: Scalars['String']['output'];
   success: Scalars['Boolean']['output'];
 };
@@ -78,6 +95,7 @@ export type ModelIncrementNombreDeLikeResponse = {
 export type ModelMutation = {
   __typename?: 'Mutation';
   createArticle: ModelCreateArticleResponse;
+  createCommentaire: ModelCreateCommentaireResponse;
   createUser: ModelCreateUserResponse;
   deleteArticle: ModelDeleteArticleResponse;
   incrementNombreDeLike: ModelIncrementNombreDeLikeResponse;
@@ -90,6 +108,13 @@ export type ModelMutation = {
 export type ModelMutationCreateArticleArgs = {
   description: Scalars['String']['input'];
   titre: Scalars['String']['input'];
+  userId: Scalars['ID']['input'];
+};
+
+
+export type ModelMutationCreateCommentaireArgs = {
+  articleId: Scalars['ID']['input'];
+  contenu: Scalars['String']['input'];
   userId: Scalars['ID']['input'];
 };
 
@@ -134,10 +159,17 @@ export type ModelQuery = {
   doctors?: Maybe<Array<Maybe<ModelDoctor>>>;
   getArticleById?: Maybe<ModelArticle>;
   getArticles?: Maybe<Array<Maybe<ModelArticle>>>;
+  getCommentaireByID?: Maybe<ModelCommentaire>;
+  getCommentaires?: Maybe<Array<Maybe<ModelCommentaire>>>;
 };
 
 
 export type ModelQueryGetArticleByIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type ModelQueryGetCommentaireByIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -244,7 +276,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ModelResolversTypes = {
   Article: ResolverTypeWrapper<Article>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Commentaire: ResolverTypeWrapper<Commentaire>;
   CreateArticleResponse: ResolverTypeWrapper<Omit<ModelCreateArticleResponse, 'article'> & { article?: Maybe<ModelResolversTypes['Article']> }>;
+  CreateCommentaireResponse: ResolverTypeWrapper<Omit<ModelCreateCommentaireResponse, 'commentaire'> & { commentaire?: Maybe<ModelResolversTypes['Commentaire']> }>;
   CreateUserResponse: ResolverTypeWrapper<ModelCreateUserResponse>;
   DeleteArticleResponse: ResolverTypeWrapper<Omit<ModelDeleteArticleResponse, 'article'> & { article?: Maybe<ModelResolversTypes['Article']> }>;
   Doctor: ResolverTypeWrapper<ModelDoctor>;
@@ -265,7 +299,9 @@ export type ModelResolversTypes = {
 export type ModelResolversParentTypes = {
   Article: Article;
   Boolean: Scalars['Boolean']['output'];
+  Commentaire: Commentaire;
   CreateArticleResponse: Omit<ModelCreateArticleResponse, 'article'> & { article?: Maybe<ModelResolversParentTypes['Article']> };
+  CreateCommentaireResponse: Omit<ModelCreateCommentaireResponse, 'commentaire'> & { commentaire?: Maybe<ModelResolversParentTypes['Commentaire']> };
   CreateUserResponse: ModelCreateUserResponse;
   DeleteArticleResponse: Omit<ModelDeleteArticleResponse, 'article'> & { article?: Maybe<ModelResolversParentTypes['Article']> };
   Doctor: ModelDoctor;
@@ -292,9 +328,26 @@ export type ModelArticleResolvers<ContextType = DataSourceContext, ParentType ex
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ModelCommentaireResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Commentaire'] = ModelResolversParentTypes['Commentaire']> = {
+  article?: Resolver<ModelResolversTypes['Article'], ParentType, ContextType>;
+  auteur?: Resolver<ModelResolversTypes['User'], ParentType, ContextType>;
+  contenu?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
+  date?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ModelResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ModelCreateArticleResponseResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['CreateArticleResponse'] = ModelResolversParentTypes['CreateArticleResponse']> = {
   article?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType>;
   code?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;
+  message?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ModelResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ModelCreateCommentaireResponseResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['CreateCommentaireResponse'] = ModelResolversParentTypes['CreateCommentaireResponse']> = {
+  code?: Resolver<ModelResolversTypes['Int'], ParentType, ContextType>;
+  commentaire?: Resolver<Maybe<ModelResolversTypes['Commentaire']>, ParentType, ContextType>;
   message?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ModelResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -340,6 +393,7 @@ export type ModelIncrementNombreDeLikeResponseResolvers<ContextType = DataSource
 
 export type ModelMutationResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Mutation'] = ModelResolversParentTypes['Mutation']> = {
   createArticle?: Resolver<ModelResolversTypes['CreateArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationCreateArticleArgs, 'description' | 'titre' | 'userId'>>;
+  createCommentaire?: Resolver<ModelResolversTypes['CreateCommentaireResponse'], ParentType, ContextType, RequireFields<ModelMutationCreateCommentaireArgs, 'articleId' | 'contenu' | 'userId'>>;
   createUser?: Resolver<ModelResolversTypes['CreateUserResponse'], ParentType, ContextType, RequireFields<ModelMutationCreateUserArgs, 'password' | 'username'>>;
   deleteArticle?: Resolver<ModelResolversTypes['DeleteArticleResponse'], ParentType, ContextType, RequireFields<ModelMutationDeleteArticleArgs, 'id'>>;
   incrementNombreDeLike?: Resolver<ModelResolversTypes['IncrementNombreDeLikeResponse'], ParentType, ContextType, RequireFields<ModelMutationIncrementNombreDeLikeArgs, 'id'>>;
@@ -352,6 +406,8 @@ export type ModelQueryResolvers<ContextType = DataSourceContext, ParentType exte
   doctors?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Doctor']>>>, ParentType, ContextType>;
   getArticleById?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType, RequireFields<ModelQueryGetArticleByIdArgs, 'id'>>;
   getArticles?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Article']>>>, ParentType, ContextType>;
+  getCommentaireByID?: Resolver<Maybe<ModelResolversTypes['Commentaire']>, ParentType, ContextType, RequireFields<ModelQueryGetCommentaireByIdArgs, 'id'>>;
+  getCommentaires?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Commentaire']>>>, ParentType, ContextType>;
 };
 
 export type ModelSignInResponseResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['SignInResponse'] = ModelResolversParentTypes['SignInResponse']> = {
@@ -386,7 +442,9 @@ export type ModelUserResolvers<ContextType = DataSourceContext, ParentType exten
 
 export type ModelResolvers<ContextType = DataSourceContext> = {
   Article?: ModelArticleResolvers<ContextType>;
+  Commentaire?: ModelCommentaireResolvers<ContextType>;
   CreateArticleResponse?: ModelCreateArticleResponseResolvers<ContextType>;
+  CreateCommentaireResponse?: ModelCreateCommentaireResponseResolvers<ContextType>;
   CreateUserResponse?: ModelCreateUserResponseResolvers<ContextType>;
   DeleteArticleResponse?: ModelDeleteArticleResponseResolvers<ContextType>;
   Doctor?: ModelDoctorResolvers<ContextType>;

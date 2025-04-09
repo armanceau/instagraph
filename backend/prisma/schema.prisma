@@ -15,6 +15,7 @@ model User {
   username String    @unique
   password String
   articles Article[]
+  commentaires Commentaire[]
 }
 
 model Article {
@@ -25,4 +26,16 @@ model Article {
   userId       String
   nombreDeLike Int
   date         BigInt
+  commentaires     Commentaire[]
+}
+
+model Commentaire {
+  id           String @id @unique @default(uuid())
+  contenu      String
+  article      Article @relation(fields: [articleId], references: [id])
+  auteur       User   @relation(fields: [userId], references: [id])
+  date         BigInt
+  userId   String
+  articleId    String
+
 }

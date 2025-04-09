@@ -10,7 +10,8 @@ const config: CodegenConfig = {
         typesPrefix: "Model",
         contextType: './context#DataSourceContext',
         mappers: {
-          Article: '@prisma/client#Article'         
+          Article: '@prisma/client#Article',
+          Commentaire: '@prisma/client#Commentaire',       
         }
       }
     },
