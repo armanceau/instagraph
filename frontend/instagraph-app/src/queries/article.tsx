@@ -19,19 +19,13 @@ export const getArticles = graphql(`
 `);
 
 export const getArticlesByUser = graphql(`
-  query Query {
-    getArticles {
-      date
-      description
+  query QueryUser($getArticleByUserIdId: ID!) {
+    getArticleByUserId(id: $getArticleByUserIdId) {
       id
-      nombreDeLike
       titre
-      auteur {
-        id
-        username
-        email
-        ntel
-      }
+      description
+      nombreDeLike
+      date
     }
   }
 `);

@@ -171,6 +171,7 @@ export type MutationUpdatePartielleArticleArgs = {
 export type Query = {
   __typename?: 'Query';
   getArticleById?: Maybe<Article>;
+  getArticleByUserId?: Maybe<Array<Maybe<Article>>>;
   getArticles?: Maybe<Array<Maybe<Article>>>;
   getCommentaireByID?: Maybe<Commentaire>;
   getCommentaires?: Maybe<Array<Maybe<Commentaire>>>;
@@ -178,6 +179,11 @@ export type Query = {
 
 
 export type QueryGetArticleByIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryGetArticleByUserIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -231,5 +237,13 @@ export type QueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type QueryQuery = { __typename?: 'Query', getArticles?: Array<{ __typename?: 'Article', date: string, description: string, id: string, nombreDeLike: number, titre: string, auteur: { __typename?: 'User', id: string, username: string, email: string, ntel: string } } | null> | null };
 
+export type QueryUserQueryVariables = Exact<{
+  getArticleByUserIdId: Scalars['ID']['input'];
+}>;
+
+
+export type QueryUserQuery = { __typename?: 'Query', getArticleByUserId?: Array<{ __typename?: 'Article', id: string, titre: string, description: string, nombreDeLike: number, date: string } | null> | null };
+
 
 export const QueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Query"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nombreDeLike"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"auteur"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"ntel"}}]}}]}}]}}]} as unknown as DocumentNode<QueryQuery, QueryQueryVariables>;
+export const QueryUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"QueryUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"getArticleByUserIdId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticleByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"getArticleByUserIdId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"titre"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"nombreDeLike"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<QueryUserQuery, QueryUserQueryVariables>;

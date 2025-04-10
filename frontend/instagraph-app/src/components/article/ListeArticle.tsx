@@ -18,6 +18,7 @@ const ListeArticle = () => {
               date={article.date!}
               nombreDeLike={article.nombreDeLike!}
               username={article.auteur.username!}
+              userId={article.auteur.id!}
             />
           );
         })}

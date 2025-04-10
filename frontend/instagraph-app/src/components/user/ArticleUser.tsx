@@ -1,31 +1,23 @@
-import "./article.css";
-import { Link } from "react-router";
+import "./articleUser.css";
 
-interface ArticleProps {
+interface ArticleUserProps {
   id: string;
   titre: string;
   description: string;
   date: string;
   nombreDeLike: number;
-  username: string;
-  userId: string;
 }
 
-const Article = ({
+const ArticleUser = ({
   id,
   titre,
   description,
   date,
   nombreDeLike,
-  username,
-  userId,
-}: ArticleProps) => {
+}: ArticleUserProps) => {
   return (
     <div key={id} className="article-card">
       <div className="article-card-header">
-        <Link className="article-card-user" to={userId}>
-          {username}
-        </Link>
         <div className="article-card-date">{date}</div>
       </div>
       <div className="article-card-body">
@@ -39,4 +31,4 @@ const Article = ({
   );
 };
 
-export default Article;
+export default ArticleUser;
