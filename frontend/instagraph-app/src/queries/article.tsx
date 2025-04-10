@@ -17,3 +17,21 @@ export const getArticles = graphql(`
     }
   }
 `);
+
+export const getArticlesByUser = graphql(`
+  query Query {
+    getArticles {
+      date
+      description
+      id
+      nombreDeLike
+      titre
+      auteur {
+        id
+        username
+        email
+        ntel
+      }
+    }
+  }
+`);

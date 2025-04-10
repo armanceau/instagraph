@@ -1,4 +1,5 @@
 import "./article.css";
+import { Link } from "react-router";
 
 interface ArticleProps {
   id: string;
@@ -20,7 +21,9 @@ const Article = ({
   return (
     <div key={id} className="article-card">
       <div className="article-card-header">
-        <div className="article-card-user">{username}</div>
+        <Link className="article-card-user" to={username}>
+          {username}
+        </Link>
         <div className="article-card-date">{date}</div>
       </div>
       <div className="article-card-body">

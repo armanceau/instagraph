@@ -6,34 +6,36 @@ import { commentaireMutations } from "./domain/commentaire/mutation.js";
 import { CommentaireResolver } from "./domain/commentaire/models.js";
 import { get } from "http";
 
-
 const prisma = new PrismaClient();
 
 export const resolvers = {
   Query: {
     getArticles: () => {
-      return prisma.article.findMany()
-  }, 
-
-  getArticleById: (_, args) => {
-      const id = args.id
+      return prisma.article.findMany();
+    },
+    getArticleById: (_, args) => {
+      const id = args.id;
       return prisma.article.findUnique({
-          where: {id}
-      })
-  },
-  getCommentaires: () => {
-    return prisma.commentaire.findMany()
-  }
-  ,
-
-  getCommentaireByID: (_, args) => {
-    const id = args.id
-    return prisma.commentaire.findUnique({
-        where: {id}
-    })
-  }
-  
-
+        where: { id },
+      });
+    },
+    getArticleByUserId: (_, args) => {
+      const userId = args.id;
+      return prisma.article.findMany({
+        where: {
+          userId,
+        },
+      });
+    },
+    getCommentaires: () => {
+      return prisma.commentaire.findMany();
+    },
+    getCommentaireByID: (_, args) => {
+      const id = args.id;
+      return prisma.commentaire.findUnique({
+        where: { id },
+      });
+    },
   },
   Mutation: {
     ...userMutations,
@@ -42,5 +44,5 @@ export const resolvers = {
   },
 
   Article: ArticleResolver,
-  Commentaire: CommentaireResolver
+  Commentaire: CommentaireResolver,
 };

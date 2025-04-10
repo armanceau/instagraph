@@ -2,7 +2,12 @@ import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Mutation {
-    createUser(username: String!, password: String!, email: String!, ntel: String!): CreateUserResponse!
+    createUser(
+      username: String!
+      password: String!
+      email: String!
+      ntel: String!
+    ): CreateUserResponse!
     signIn(username: String!, password: String!): SignInResponse!
     createArticle(
       titre: String!
@@ -21,9 +26,14 @@ export const typeDefs = gql`
       description: String!
     ): UpdatePartielleArticleResponse!
     incrementNombreDeLike(id: ID!): IncrementNombreDeLikeResponse!
-    createCommentaire(contenu: String!, userId: ID!, articleId: ID!): CreateCommentaireResponse!
+    createCommentaire(
+      contenu: String!
+      userId: ID!
+      articleId: ID!
+    ): CreateCommentaireResponse!
     deleteCommentaire(id: ID!): DeleteCommentaireResponse!
     updateCommentaire(id: ID!, contenu: String!): UpdateCommentaireResponse!
+    
   }
 
   type IncrementNombreDeLikeResponse {
@@ -32,7 +42,7 @@ export const typeDefs = gql`
     message: String!
     article: Article
   }
-  
+
   type CreateUserResponse {
     code: Int!
     success: Boolean!
@@ -52,6 +62,7 @@ export const typeDefs = gql`
     getArticleById(id: ID!): Article
     getCommentaireByID(id: ID!): Commentaire
     getCommentaires: [Commentaire]
+    getArticleByUserId(id: ID!): [Article]
   }
 
   type User {
@@ -130,5 +141,4 @@ export const typeDefs = gql`
     message: String!
     article: Article
   }
-  
 `;

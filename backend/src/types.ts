@@ -174,6 +174,7 @@ export type ModelMutationUpdatePartielleArticleArgs = {
 export type ModelQuery = {
   __typename?: 'Query';
   getArticleById?: Maybe<ModelArticle>;
+  getArticleByUserId?: Maybe<Array<Maybe<ModelArticle>>>;
   getArticles?: Maybe<Array<Maybe<ModelArticle>>>;
   getCommentaireByID?: Maybe<ModelCommentaire>;
   getCommentaires?: Maybe<Array<Maybe<ModelCommentaire>>>;
@@ -181,6 +182,11 @@ export type ModelQuery = {
 
 
 export type ModelQueryGetArticleByIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type ModelQueryGetArticleByUserIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -436,6 +442,7 @@ export type ModelMutationResolvers<ContextType = DataSourceContext, ParentType e
 
 export type ModelQueryResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Query'] = ModelResolversParentTypes['Query']> = {
   getArticleById?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType, RequireFields<ModelQueryGetArticleByIdArgs, 'id'>>;
+  getArticleByUserId?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Article']>>>, ParentType, ContextType, RequireFields<ModelQueryGetArticleByUserIdArgs, 'id'>>;
   getArticles?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Article']>>>, ParentType, ContextType>;
   getCommentaireByID?: Resolver<Maybe<ModelResolversTypes['Commentaire']>, ParentType, ContextType, RequireFields<ModelQueryGetCommentaireByIdArgs, 'id'>>;
   getCommentaires?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Commentaire']>>>, ParentType, ContextType>;
