@@ -1,3 +1,5 @@
+import "./article.css";
+
 interface ArticleProps {
   id: string;
   titre: string;
@@ -16,14 +18,18 @@ const Article = ({
   username,
 }: ArticleProps) => {
   return (
-    <div className="card-container">
-      <div key={id} className="card">
-        <h2>{titre}</h2>
-        <p>{description}</p>
-        <p>Date : {date}</p>
-        <p>Likes : {nombreDeLike}</p>
-        <p>Auteur : {username}</p>
+    <div key={id} className="article-card">
+      <div className="article-card-header">
+        <div className="article-card-user">{username}</div>
+        <div className="article-card-date">{date}</div>
       </div>
+      <div className="article-card-body">
+        <div>
+          <h2>{titre}</h2>
+          <p>{description}</p>
+        </div>
+      </div>
+      <div>Likes : {nombreDeLike}</div>
     </div>
   );
 };

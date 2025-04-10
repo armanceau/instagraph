@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { getArticles } from "../../queries/article";
 import Article from "./Article";
+import "./article.css";
 
 const ListeArticle = () => {
   const { data } = useQuery(getArticles);
   return (
-    <div className="card-container">
+    <div className="article-container">
       {(data?.getArticles ?? [])
         .filter((el) => el !== null)
         .map((article) => {

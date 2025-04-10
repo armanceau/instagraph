@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import User from "./components/user/User.tsx";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
@@ -16,7 +17,7 @@ createRoot(document.getElementById("root")!).render(
       <ApolloProvider client={client}>
         <Routes>
           <Route path="/" element={<App />} />
-          {/* <Route path="/:characterId" element={<CharacterDetails />} /> */}
+          <Route path="/:userId" element={<User />} />
         </Routes>
       </ApolloProvider>
     </BrowserRouter>
