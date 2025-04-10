@@ -30,6 +30,8 @@ export function RegisterComponentFunc() {
                 ntel,
             },
         });
+        console.log("value email", email)
+        console.log("value ntel", ntel)
         console.log("result create user ==>", result)
         console.log("content data", data?.createUser.user)
         resetData()

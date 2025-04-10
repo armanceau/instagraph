@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { signinDocument } from "../queries/signin";
 import { useMutation } from "@apollo/client";
+import "../style/SigninForm.css";
 import '../style/RegisterForm.css';
 
-export function RegisterComponentFunc() {
+export function SigninComponentFunc() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
   
@@ -25,6 +26,8 @@ export function RegisterComponentFunc() {
         });
         console.log("result create user ==>", result)
         console.log("result create user ==>", data)
+        //ici gérer la navigation vers la page principale
+        //navigate("/dashboard");
         resetData()
     } catch (error) {
         console.log(error)
@@ -46,10 +49,8 @@ export function RegisterComponentFunc() {
         </div>
         <div>
             <label htmlFor="Password">Password:</label>
-            <input type="password" value={password} onChange={eventForm => setPassword(eventForm.target.value)}/>
+            <input type="password" value={password} onChange={eventForm => setPassword(eventForm.target.value)} placeholder="••••••••"/>
         </div>
-
-
         <div>
             <button type="submit">Login to the app</button>
         </div>
