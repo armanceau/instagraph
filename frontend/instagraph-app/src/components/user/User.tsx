@@ -6,7 +6,7 @@ import ArticleUser from "./ArticleUser";
 const User = () => {
   const { userId, username } = useParams();
   const { data, loading, error } = useQuery(getArticlesByUser, {
-    variables: { getArticleByUserIdId: userId ?? "" },
+    variables: { getArticleByUserId: userId ?? "" },
   });
 
   if (loading) return <p>Loading...</p>;

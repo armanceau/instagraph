@@ -15,13 +15,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n  query Query {\n    getArticles {\n      date\n      description\n      id\n      nombreDeLike\n      titre\n      auteur {\n        id\n        username\n        email\n        ntel\n      }\n    }\n  }\n": typeof types.QueryDocument,
-    "\n  query QueryUser($getArticleByUserIdId: ID!) {\n    getArticleByUserId(id: $getArticleByUserIdId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n": typeof types.QueryUserDocument,
-    "\n  mutation Mutation($incrementNombreDeLikeId: ID!) {\n    incrementNombreDeLike(id: $incrementNombreDeLikeId) {\n      code\n      success\n      message\n      article {\n        nombreDeLike\n      }\n    }\n  }\n": typeof types.MutationDocument,
+    "\n  query QueryUser($getArticleByUserId: ID!) {\n    getArticleByUserId(id: $getArticleByUserId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n": typeof types.QueryUserDocument,
 };
 const documents: Documents = {
     "\n  query Query {\n    getArticles {\n      date\n      description\n      id\n      nombreDeLike\n      titre\n      auteur {\n        id\n        username\n        email\n        ntel\n      }\n    }\n  }\n": types.QueryDocument,
-    "\n  query QueryUser($getArticleByUserIdId: ID!) {\n    getArticleByUserId(id: $getArticleByUserIdId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n": types.QueryUserDocument,
-    "\n  mutation Mutation($incrementNombreDeLikeId: ID!) {\n    incrementNombreDeLike(id: $incrementNombreDeLikeId) {\n      code\n      success\n      message\n      article {\n        nombreDeLike\n      }\n    }\n  }\n": types.MutationDocument,
+    "\n  query QueryUser($getArticleByUserId: ID!) {\n    getArticleByUserId(id: $getArticleByUserId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n": types.QueryUserDocument,
 };
 
 /**
@@ -45,11 +43,7 @@ export function graphql(source: "\n  query Query {\n    getArticles {\n      dat
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query QueryUser($getArticleByUserIdId: ID!) {\n    getArticleByUserId(id: $getArticleByUserIdId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n"): (typeof documents)["\n  query QueryUser($getArticleByUserIdId: ID!) {\n    getArticleByUserId(id: $getArticleByUserIdId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation Mutation($incrementNombreDeLikeId: ID!) {\n    incrementNombreDeLike(id: $incrementNombreDeLikeId) {\n      code\n      success\n      message\n      article {\n        nombreDeLike\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation Mutation($incrementNombreDeLikeId: ID!) {\n    incrementNombreDeLike(id: $incrementNombreDeLikeId) {\n      code\n      success\n      message\n      article {\n        nombreDeLike\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query QueryUser($getArticleByUserId: ID!) {\n    getArticleByUserId(id: $getArticleByUserId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n"): (typeof documents)["\n  query QueryUser($getArticleByUserId: ID!) {\n    getArticleByUserId(id: $getArticleByUserId) {\n      id\n      titre\n      description\n      nombreDeLike\n      date\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

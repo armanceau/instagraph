@@ -238,7 +238,7 @@ export type QueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type QueryQuery = { __typename?: 'Query', getArticles?: Array<{ __typename?: 'Article', date: string, description: string, id: string, nombreDeLike: number, titre: string, auteur: { __typename?: 'User', id: string, username: string, email: string, ntel: string } } | null> | null };
 
 export type QueryUserQueryVariables = Exact<{
-  getArticleByUserIdId: Scalars['ID']['input'];
+  getArticleByUserId: Scalars['ID']['input'];
 }>;
 
 
