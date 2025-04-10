@@ -30,6 +30,12 @@ export function RegisterComponentFunc() {
                 ntel,
             },
         });
+
+        const userId = result.data?.createUser?.user?.id;
+        if (userId) {
+            localStorage.setItem("userId", userId);
+            console.log("User ID saved in localStorage:", userId);
+        }
         console.log("value email", email)
         console.log("value ntel", ntel)
         console.log("result create user ==>", result)
