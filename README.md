@@ -36,6 +36,9 @@ Date DATE!
 | `id`       | STRING | PRIMARY KEY         | Identifiant unique de l'utilisateur |
 | `username` | STRING | UNIQUE, NOT NULL    | Nom d'utilisateur |
 | `password` | STRING | NOT NULL            | Mot de passe haché |
+| `email` | STRING | NOT NULL            | Email de l'utilisateur |
+| `ntel` | STRING | NOT NULL            | Numéro de téléphone de l'utilisateur |
+
 
 ---
 
