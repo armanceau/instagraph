@@ -27,12 +27,12 @@ const Commentaire = ({ articleId, userId }: CommentaireProps) => {
     {
       onCompleted: () => {
         setContenu("");
-        refetch(); // recharge les commentaires après ajout
+        refetch();
       },
     }
   );
 
-  // ⚠️ Temporaire, à sécuriser plus tard
+  // ⚠️ A modifier lorsqu'on pourra récupérer l'id de l'utilisateur + ajouter une sécurité, si utilisateur n'est pas connecté alors il ne peut pas ajouter de commentaire
   userId = "27c55fdf-f9d3-4572-9ab0-29894ca97910";
 
   const handleAddCommentaire = async (e: React.FormEvent) => {
