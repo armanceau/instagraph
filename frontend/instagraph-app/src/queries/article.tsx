@@ -42,16 +42,3 @@ export const incrementLike = graphql(`
     }
   }
 `);
-
-export const getCommentairesByArticle = graphql(`
-  query QueryCommentaire($getCommentaireByArticleId: ID!) {
-    getCommentaireByArticleId(id: $getCommentaireByArticleId) {
-      auteur {
-        username
-      }
-      contenu
-      date
-      id
-    }
-  }
-`);

@@ -3,7 +3,9 @@ import "../components.css";
 import { Link } from "react-router";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ChatDotsFill, HeartFill } from "react-bootstrap-icons";
-import { getCommentairesByArticle, incrementLike } from "../../queries/article";
+import { incrementLike } from "../../queries/article";
+import { getCommentairesByArticle } from "../../queries/commentaire";
+import Commentaire from "../commentaire/Commentaire";
 
 interface ArticleProps {
   id: string;
@@ -29,9 +31,7 @@ const Article = ({
   const [likeCount, setLikeCount] = useState(nombreDeLike);
   const [addLike] = useMutation(incrementLike);
   const [showComments, setShowComments] = useState(false);
-  const [fetchComments, { data: commentsData, loading }] = useLazyQuery(
-    getCommentairesByArticle
-  );
+  const [fetchComments] = useLazyQuery(getCommentairesByArticle);
 
   const handleToggleComments = () => {
     if (!showComments) {
@@ -85,41 +85,7 @@ const Article = ({
           onClick={handleToggleComments}
         />
       </div>
-      {showComments && (
-        <div className="article-card-comments">
-          {loading ? (
-            <p>Chargement des commentaires...</p>
-          ) : (
-            <>
-              {commentsData?.getCommentaireByArticleId ? (
-                commentsData.getCommentaireByArticleId.map((comment) => (
-                  <div key={comment?.id} className="comment">
-                    <strong>{comment?.auteur.username}</strong> :{" "}
-                    {comment?.contenu}
-                  </div>
-                ))
-              ) : (
-                <p>Aucun commentaire pour le moment.</p>
-              )}
-
-              {/* Champ pour ajouter un commentaire */}
-              <form
-                style={{ marginTop: "10px" }}
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <input
-                  type="text"
-                  placeholder="Ajouter un commentaire..."
-                  className="form-control"
-                />
-                <button type="submit" className="btn btn-primary btn-sm mt-2">
-                  Envoyer
-                </button>
-              </form>
-            </>
-          )}
-        </div>
-      )}
+      {showComments && <Commentaire articleId={id} userId={userId} />}
     </div>
   );
 };
