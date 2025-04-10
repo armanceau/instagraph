@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")!).render(
       <ApolloProvider client={client}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/:userId" element={<User />} />
+          <Route path="/user/:userId/:username" element={<User />} />
         </Routes>
       </ApolloProvider>
     </BrowserRouter>

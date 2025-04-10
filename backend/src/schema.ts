@@ -33,7 +33,6 @@ export const typeDefs = gql`
     ): CreateCommentaireResponse!
     deleteCommentaire(id: ID!): DeleteCommentaireResponse!
     updateCommentaire(id: ID!, contenu: String!): UpdateCommentaireResponse!
-    
   }
 
   type IncrementNombreDeLikeResponse {
@@ -63,6 +62,7 @@ export const typeDefs = gql`
     getCommentaireByID(id: ID!): Commentaire
     getCommentaires: [Commentaire]
     getArticleByUserId(id: ID!): [Article]
+    getCommentaireByArticleId(id: ID!): [Commentaire]
   }
 
   type User {
@@ -79,6 +79,7 @@ export const typeDefs = gql`
     auteur: User!
     nombreDeLike: Int!
     date: String!
+    commentaire: [Commentaire]
   }
 
   type IncrementNombreDeLikeReponse {

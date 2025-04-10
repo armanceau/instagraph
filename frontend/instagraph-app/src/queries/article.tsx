@@ -29,3 +29,16 @@ export const getArticlesByUser = graphql(`
     }
   }
 `);
+
+export const incrementLike = graphql(`
+  mutation Mutation($incrementNombreDeLikeId: ID!) {
+    incrementNombreDeLike(id: $incrementNombreDeLikeId) {
+      code
+      success
+      message
+      article {
+        nombreDeLike
+      }
+    }
+  }
+`);

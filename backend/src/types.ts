@@ -22,6 +22,7 @@ export type Scalars = {
 export type ModelArticle = {
   __typename?: 'Article';
   auteur: ModelUser;
+  commentaire?: Maybe<Array<Maybe<ModelCommentaire>>>;
   date: Scalars['String']['output'];
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -176,6 +177,7 @@ export type ModelQuery = {
   getArticleById?: Maybe<ModelArticle>;
   getArticleByUserId?: Maybe<Array<Maybe<ModelArticle>>>;
   getArticles?: Maybe<Array<Maybe<ModelArticle>>>;
+  getCommentaireByArticleId?: Maybe<Array<Maybe<ModelCommentaire>>>;
   getCommentaireByID?: Maybe<ModelCommentaire>;
   getCommentaires?: Maybe<Array<Maybe<ModelCommentaire>>>;
 };
@@ -187,6 +189,11 @@ export type ModelQueryGetArticleByIdArgs = {
 
 
 export type ModelQueryGetArticleByUserIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type ModelQueryGetCommentaireByArticleIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -354,6 +361,7 @@ export type ModelResolversParentTypes = {
 
 export type ModelArticleResolvers<ContextType = DataSourceContext, ParentType extends ModelResolversParentTypes['Article'] = ModelResolversParentTypes['Article']> = {
   auteur?: Resolver<ModelResolversTypes['User'], ParentType, ContextType>;
+  commentaire?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Commentaire']>>>, ParentType, ContextType>;
   date?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ModelResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ModelResolversTypes['ID'], ParentType, ContextType>;
@@ -444,6 +452,7 @@ export type ModelQueryResolvers<ContextType = DataSourceContext, ParentType exte
   getArticleById?: Resolver<Maybe<ModelResolversTypes['Article']>, ParentType, ContextType, RequireFields<ModelQueryGetArticleByIdArgs, 'id'>>;
   getArticleByUserId?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Article']>>>, ParentType, ContextType, RequireFields<ModelQueryGetArticleByUserIdArgs, 'id'>>;
   getArticles?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Article']>>>, ParentType, ContextType>;
+  getCommentaireByArticleId?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Commentaire']>>>, ParentType, ContextType, RequireFields<ModelQueryGetCommentaireByArticleIdArgs, 'id'>>;
   getCommentaireByID?: Resolver<Maybe<ModelResolversTypes['Commentaire']>, ParentType, ContextType, RequireFields<ModelQueryGetCommentaireByIdArgs, 'id'>>;
   getCommentaires?: Resolver<Maybe<Array<Maybe<ModelResolversTypes['Commentaire']>>>, ParentType, ContextType>;
 };

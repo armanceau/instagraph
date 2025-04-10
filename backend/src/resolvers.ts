@@ -36,6 +36,14 @@ export const resolvers = {
         where: { id },
       });
     },
+    getCommentaireByArticleId: (_, args) => {
+      const articleId = args.id;
+      return prisma.commentaire.findMany({
+        where: {
+          articleId,
+        },
+      });
+    },
   },
   Mutation: {
     ...userMutations,
