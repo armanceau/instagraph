@@ -1,6 +1,6 @@
 import { graphql } from "../gql";
 
-export const allFilmsWithVariablesQueryDocument = graphql(`
+export const getArticles = graphql(`
   query Query {
     getArticles {
       date
@@ -8,6 +8,12 @@ export const allFilmsWithVariablesQueryDocument = graphql(`
       id
       nombreDeLike
       titre
+      auteur {
+        id
+        username
+        email
+        ntel
+      }
     }
   }
 `);
