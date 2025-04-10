@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Mutation {
-    createUser(username: String!, password: String!): CreateUserResponse!
+    createUser(username: String!, password: String!, email: String!, ntel: String!): CreateUserResponse!
     signIn(username: String!, password: String!): SignInResponse!
     createArticle(
       titre: String!
@@ -48,7 +48,6 @@ export const typeDefs = gql`
   }
 
   type Query {
-    doctors: [Doctor]
     getArticles: [Article]
     getArticleById(id: ID!): Article
     getCommentaireByID(id: ID!): Commentaire
@@ -58,11 +57,8 @@ export const typeDefs = gql`
   type User {
     id: ID!
     username: String!
-  }
-
-  type Doctor {
-    id: ID!
-    username: String!
+    email: String!
+    ntel: String!
   }
 
   type Article {
