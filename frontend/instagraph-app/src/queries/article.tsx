@@ -19,8 +19,8 @@ export const getArticles = graphql(`
 `);
 
 export const getArticlesByUser = graphql(`
-  query QueryUser($getArticleByUserIdId: ID!) {
-    getArticleByUserId(id: $getArticleByUserIdId) {
+  query QueryUser($getArticleByUserId: ID!) {
+    getArticleByUserId(id: $getArticleByUserId) {
       id
       titre
       description

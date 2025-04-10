@@ -7,7 +7,7 @@ const User = () => {
   const { userId } = useParams<{ userId?: string }>();
 
   const { data, loading, error } = useQuery(getArticlesByUser, {
-    variables: { getArticleByUserIdId: userId ?? "" },
+    variables: { getArticleByUserId: userId ?? "" },
   });
 
   if (loading) return <p>Loading...</p>;
