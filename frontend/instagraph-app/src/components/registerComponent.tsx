@@ -35,6 +35,7 @@ export function RegisterComponentFunc() {
         if (userId) {
             localStorage.setItem("userId", userId);
             console.log("User ID saved in localStorage:", userId);
+            window.location.href = "/signin"
         }
         console.log("value email", email)
         console.log("value ntel", ntel)
@@ -54,7 +55,7 @@ export function RegisterComponentFunc() {
     return (
     <>
     <div>
-    <form onSubmit={handleFormSubmit}>
+    <form className="register-form" onSubmit={handleFormSubmit}>
         <div>
             <label  htmlFor="Name">Name:</label>
             <input value={username} onChange={eventForm => setUsername(eventForm.target.value)}/>

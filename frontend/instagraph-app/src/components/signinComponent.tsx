@@ -24,6 +24,7 @@ export function SigninComponentFunc() {
                 password,
             },
         });
+        window.location.href = "/"
         console.log("result create user ==>", result)
         console.log("result create user ==>", data)
         //ici gérer la navigation vers la page principale
@@ -42,7 +43,7 @@ export function SigninComponentFunc() {
     return (
     <>
     <div>
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className="signin-form">
         <div>
             <label  htmlFor="Name">Name:</label>
             <input value={username} onChange={eventForm => setUsername(eventForm.target.value)}/>

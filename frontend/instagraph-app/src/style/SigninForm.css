@@ -1,15 +1,4 @@
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    background:  url('../images/bg.avif'); 
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
   .form-wrapper {
     background-color: rgba(255, 255, 255, 0.85);
     padding: 2rem;
@@ -19,31 +8,31 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
   
-  form div {
+  .signin-form div {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
   }
   
-  label {
+  .signin-form label {
     margin-bottom: 0.5rem;
     font-weight: 600;
     color: #333;
   }
   
-  input {
+  .signin-form input {
     padding: 0.6rem 0.8rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
   }
   
-  input:focus {
+  .signin-form input:focus {
     border-color: #0077cc;
     outline: none;
   }
   
-  button {
+  .signin-form button {
     padding: 0.7rem 1.2rem;
     background-color: #0077cc;
     color: white;
@@ -53,7 +42,7 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
+  .signin-form button:hover {
     background-color: #005fa3;
   }
   
