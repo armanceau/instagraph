@@ -14,9 +14,11 @@
     "@apollo/client": "^3.13.6",
     "@graphql-codegen/cli": "^5.0.5",
     "@parcel/watcher": "^2.5.1",
+    "bootstrap-icons": "^1.11.3",
     "graphql": "^16.10.0",
     "instagraph-app": "file:",
     "react": "^19.0.0",
+    "react-bootstrap-icons": "^1.11.5",
     "react-dom": "^19.0.0",
     "react-router": "^7.5.0"
   },
