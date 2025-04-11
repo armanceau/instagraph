@@ -42,3 +42,12 @@ export const incrementLike = graphql(`
     }
   }
 `);
+
+export const ajoutArticle = graphql(`
+  mutation ajoutArticle($titre: String!, $description: String!, $userId: ID!) {
+    createArticle(titre: $titre, description: $description, userId: $userId) {
+      success
+      message
+    }
+  }
+`);
