@@ -25,6 +25,7 @@ export const createCommentaire = graphql(`
       articleId: $articleId
     ) {
       success
+      message
     }
   }
 `);

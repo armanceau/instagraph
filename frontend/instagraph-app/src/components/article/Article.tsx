@@ -32,7 +32,7 @@ const Article = ({
   const [addLike] = useMutation(incrementLike);
   const [showComments, setShowComments] = useState(false);
   const [fetchComments] = useLazyQuery(getCommentairesByArticle);
-
+  const userIdLocal = localStorage.getItem("userId")
   const handleToggleComments = () => {
     if (!showComments) {
       fetchComments({ variables: { getCommentaireByArticleId: id } });
@@ -85,7 +85,7 @@ const Article = ({
           onClick={handleToggleComments}
         />
       </div>
-      {showComments && <Commentaire articleId={id} userId={userId} />}
+      {showComments && <Commentaire articleId={id} userId={userIdLocal!} />}
     </div>
   );
 };

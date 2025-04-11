@@ -29,11 +29,14 @@ const Commentaire = ({ articleId, userId }: CommentaireProps) => {
         setContenu("");
         refetch();
       },
-    }
+    } 
   );
 
+  if (!userId) {
+    alert("vous n'etes pas connecté")
+  }
   // ⚠️ A modifier lorsqu'on pourra récupérer l'id de l'utilisateur + ajouter une sécurité, si utilisateur n'est pas connecté alors il ne peut pas ajouter de commentaire
-  userId = "27c55fdf-f9d3-4572-9ab0-29894ca97910";
+  //userId = "9aedc59e-09be-498b-91ca-a60acf5b5201";
 
   const handleAddCommentaire = async (e: React.FormEvent) => {
     e.preventDefault();
