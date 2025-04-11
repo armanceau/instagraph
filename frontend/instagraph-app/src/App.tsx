@@ -1,4 +1,5 @@
 import "./App.css";
+import AddArticle from "./components/article/AddArticles";
 import ListeArticle from "./components/article/ListeArticle";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>Instagraph 📝</h1>
       <hr />
+      <AddArticle />
       <ListeArticle />
     </>
   );

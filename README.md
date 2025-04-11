@@ -71,5 +71,11 @@ Date DATE!
 - Un **User** peut poster plusieurs **Commentaires**.
 
 
+-------
+## Présentation 
+## Résultat de notre application !
+-  **User**.
+- Un **Article** peut recevoir plusieurs **Commentaires**.
+- Un **User** peut poster plusieurs **Commentaires**.
 
 
